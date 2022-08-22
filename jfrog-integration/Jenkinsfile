@@ -1,7 +1,7 @@
 node {
     def server = Artifactory.server('stefanradeanu.jfrog.io')
     def rtGradle = Artifactory.newGradleBuild()
-    def buildInfo = false
+    def buildInfo = Artifactory.newBuildInfo()
     stage 'Build'
         git url: 'https://github.com/stefanradeanu/gs-gradle.git'
 
@@ -22,6 +22,6 @@ node {
             rtGradle.run rootDir: "artifactory/", buildFile: 'build.gradle', tasks: 'clean artifactoryPublish', buildInfo: buildInfo
         }
         stage('Publish build info') {
-            server.publishBuildInfo buildInfo
+            server.publishBuildInfo = false
         }
 }
