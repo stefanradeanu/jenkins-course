@@ -22,6 +22,6 @@ node {
             rtGradle.run rootDir: "artifactory/", buildFile: 'build.gradle', tasks: 'clean artifactoryPublish', buildInfo: buildInfo
         }
         stage('Publish build info') {
-            server.publishBuildInfo = false
+            server.publishBuildInfo buildInfo
         }
 }
